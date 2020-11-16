@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+set -e
+volume="$1"
+filepath="${volume}.tar.gz"
+set -x
+sudo docker run --name "temp_$volume" --rm  -v "$volume:/data" -v "$(pwd):/backup" alpine tar czvf "/backup/$filepath" -C /data . 1> /dev/null
+sudo chown $USER -R "$filepath"

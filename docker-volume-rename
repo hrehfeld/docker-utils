@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+src=$1
+dst=$2
+set -e
+set -x
+[ -f "$dst.tar.gz" ] || sudo docker volume inspect "$src" > /dev/null && "$DIR/volume-copy.sh" "$src" && mv "$src.tar.gz" "$dst.tar.gz" && "$DIR/volume-restore.sh" $dst #&& sudo docker volume rm "$src"

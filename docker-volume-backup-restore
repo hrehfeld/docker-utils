@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+set -e
+volume="$1"
+filepath="${volume}.tar.gz"
+[ -e "$filepath" ] || exit 1;
+set -x
+sudo docker volume inspect "$volume" > /dev/null && sudo docker volume rm "$volume"
+sudo docker volume create "$volume"
+sudo docker run --rm  -v "$volume:/data" -v "$(pwd):/backup" alpine tar xzvf "/backup/$filepath" -C /data
+

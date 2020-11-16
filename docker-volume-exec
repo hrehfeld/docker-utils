@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+volume="$1"
+shift
+path="$1"
+shift
+sudo docker run --rm  -v "$volume:$path" alpine $@

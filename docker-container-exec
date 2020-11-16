@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+container="$1"
+shift
+sudo docker run -i "$container" $@
